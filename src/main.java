@@ -6,31 +6,42 @@ public class main {
 
     //metode ord til tal
     public static int [] numberCypherEncoder (String alfabet, String incryptOrDecryptMessage){
+        Scanner scanner = new Scanner(System.in);
+        boolean isInputVallid = true;
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.println(incryptOrDecryptMessage);
-
-            String input = scanner.nextLine().toLowerCase(Locale.ROOT);
+        String input = "";
 
         int[] charatersToIndex = new int[input.length()];
 
         char[] inputsToCharacter = input.toCharArray();
 
-            boolean isInputVallid = alfabet.contains(input);
-           // if (isInputVallid == false){
-             //   System.out.println("fejl");
-           // } else if (isInputVallid == true) {
+        do {
+            isInputVallid = true;
 
-                //int[] charatersToIndex = new int[input.length()];
+            System.out.println(incryptOrDecryptMessage);
+            input = scanner.nextLine().toLowerCase(Locale.ROOT);
 
-                //char[] inputsToCharacter = input.toCharArray();
+            String charToCheck = "";
 
-                for (int i = 0; i < inputsToCharacter.length; i++) {
+            charatersToIndex = new int[input.length()];
 
-                    charatersToIndex[i] = alfabet.indexOf(inputsToCharacter[i]) + 1;
-               // }
+            inputsToCharacter = input.toCharArray();
+
+            for (int i = 0; i < inputsToCharacter.length; i++) {
+                charToCheck = String.valueOf(inputsToCharacter[i]);
+                if (!alfabet.contains(charToCheck)) {
+                    isInputVallid = false;
+                }
             }
+            if (isInputVallid == false){
+                System.out.println("Invalid input, you have to type in characters from the alfabet or space!!");
+            }
+        } while (!isInputVallid);
 
+
+            for (int i = 0; i < inputsToCharacter.length; i++) {
+                charatersToIndex[i] = alfabet.indexOf(inputsToCharacter[i]) + 1;
+            }
 
         return charatersToIndex;
     }
@@ -138,9 +149,8 @@ public class main {
 
         boolean done = false;
         while (!done) {
-
-        System.out.println("press 1 for encode, 2 decode or q for quit");
-        String decodeOrEncode = scanner.nextLine().toLowerCase(Locale.ROOT);
+            System.out.println("press 1 for encode, 2 decode or q for quit");
+            String decodeOrEncode = scanner.nextLine().toLowerCase(Locale.ROOT);
 
             if (decodeOrEncode.equals("1")) {
                 ceaserEncoder(alfabetString);
